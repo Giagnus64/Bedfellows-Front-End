@@ -36,17 +36,18 @@ class App extends Component {
     }
     fetch(url + `/login`, config)
       .then(r => r.json())
-      .then(data => {
-        console.log(data)
-        if (data.message) {console.log(data.message)}
+      .then(user => {
+        console.log(user)
+        if (user.message) {console.log(user.message)}
         else {
           this.setState({
             loggedIn: true,
-            currentUserID: data.user.id,
-            currentUser: data.user,
-            token: data.token
+            currentUserID: user.id,
+            currentUser: user,
+            token: user.token
           })
         }
+        localStorage.token = user.token
       })
   }
 
@@ -64,16 +65,17 @@ class App extends Component {
 
     fetch(url + `/users`, config)
       .then(r => r.json())
-      .then(data => {
-        console.log(data)
-        if (data.message) {console.log(data.message)}
+      .then(user => {
+        console.log(user)
+        if (user.message) {console.log(user.message)}
         else {
           this.setState({
             loggedIn: true,
-            currentUserID: data.user.id,
-            currentUser: data.user,
-            token: data.token
+            currentUserID: user.id,
+            currentUser: user,
+            token: user.token
           })
+          localStorage.token = user.token
         }
       })
   }
@@ -82,6 +84,7 @@ class App extends Component {
     return (
     <div className="App">
           <LoginContainer currLogin={this.state} loginUser={this.loginUser} />
+
       </div>
     );
   }
