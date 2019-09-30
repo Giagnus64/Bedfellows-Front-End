@@ -4,6 +4,7 @@ const url = "http://localhost:3000"
 
 class Landing extends React.Component {
 
+<<<<<<< HEAD
   state = {
 
   }
@@ -20,6 +21,12 @@ class Landing extends React.Component {
   render() {
     
     return (<h1>fuck</h1>)
+=======
+  render() {
+    return (
+      <h1>{`Welcome ${this.props.currentUser.first_name}`}</h1>
+    )
+>>>>>>> master
   }
 
 }
