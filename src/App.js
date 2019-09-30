@@ -89,25 +89,36 @@ class App extends Component {
       return (<div className="navItems">
       <Menu.Item name='Home'/>
         <Menu.Item name='Edit User'/>
-        <Menu.Item name='Logout' />
+        <Menu.Item name='Logout' onClick={this.logout}/>
         </div>)
     }
+  }
+  logout =() =>{
+    localStorage.removeItem("token")
+    this.setState({
+      loggedIn: false,
+      currentUserID: null,
+      currentUser: {},
+      token: null
+    })
   }
 
   render(){
     return (
     <div className="App">
-        <Menu inverted stackable className="fixed top">
+        <Menu inverted className="fixed top">
           <Menu.Item header>BedFellows</Menu.Item>
           {this.navItems()}
         </Menu>
         <Switch>
           <Route
             path='/login'
+            exact
             render={ (props) => this.state.token ? <Redirect to='/home' /> : <LoginContainer currLogin={this.state} loginUser={this.loginUser} /> }
           />
         <Route
           path='/home'
+          exact
           render={ () => this.state.token ? <Landing currentUser={this.state.currentUser} /> : <Redirect to='/login' /> }
         />
         <Route
@@ -123,7 +134,10 @@ class App extends Component {
 
   componentDidMount() {
     if (localStorage.token) {
-      this.setState({token: localStorage.token})
+      this.setState({
+        token: localStorage.token,
+        loggedIn: true
+      })
       // fetch user
     }
   }
