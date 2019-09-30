@@ -18,7 +18,6 @@ class App extends Component {
   }
 
   loginUser = (creds) => {
-    // console.log(creds)
     if (creds.formStatus === "register") {
       this.registerFetch(creds)
     } else {
@@ -41,7 +40,6 @@ class App extends Component {
     fetch(url + `/login`, config)
       .then(r => r.json())
       .then(user => {
-        // console.log(user)
         if (user.message) {console.log(user.message)}
         else {
           this.setState({
@@ -74,14 +72,14 @@ class App extends Component {
         // console.log(user)
         if (user.message) {console.log(user.message)}
         else {
+          localStorage.token = user.token
+          localStorage.user_id = user.id
           this.setState({
             loggedIn: true,
             currentUserID: user.id,
             currentUser: user,
             token: user.token
           })
-          localStorage.token = user.token
-          localStorage.user_id = user.id
         }
       })
   }

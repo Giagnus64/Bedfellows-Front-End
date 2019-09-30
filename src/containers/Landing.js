@@ -1,25 +1,45 @@
 import React from 'react';
+import { Card, Button, Dimmer, Loader } from 'semantic-ui-react';
+import RelationshipCard from "../components/RelationshipCard";
 
 const url = "http://localhost:3000"
 
 class Landing extends React.Component {
 
-  state = {
-
-  }
-
-  componentDidMount = () => {
-    if (this.props.currentUser.asking_for_relationships === undefined){
-      fetch(url + `/users/${localStorage.user_id}`,
-        { headers: { "Authorization": localStorage.token } })
-      .then(res => res.json())
-      .then(console.log)
+  getRelationshipCards = () => {
+    let relationshipCards = [];
+    if(!this.props.currentUser.asking_for_relationships){
+      console.log("hit dimmer!")
+      return (
+        <Dimmer active inverted>
+          <Loader inverted>Loading</Loader>
+        </Dimmer>
+      )
+    } else{
+     console.log(this.props.currentUser)
+     const askedArr = this.props.currentUser.asked_for_relationships.map((asked) => {
+          return <RelationshipCard asked={true} key={asked.id} relationship={asked} />
+     })
+     const askingArr = this.props.currentUser.asking_for_relationships.map((asking) => {
+         return <RelationshipCard  asked={false} key={asking.id} relationship={asking} />
+     })
+    relationshipCards = [...askedArr, ...askingArr]
+    return relationshipCards;
     }
+    
+  
   }
+
 
   render() {
     
-    return (<h1>fuck</h1>)
+    return (<>
+    <h1>Relationships</h1>
+    <Card.Group>
+    {this.getRelationshipCards()}
+    </Card.Group>
+    </>
+    )
   }
 
 }
