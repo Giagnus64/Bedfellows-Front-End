@@ -4,7 +4,7 @@ import Register from '../components/register'
 
 
 class LoginContainer extends Component{
-    
+
     state = {
         first_name: '',
         last_name: '',
@@ -12,7 +12,7 @@ class LoginContainer extends Component{
         password: '',
         formStatus: 'register'
     }
-    
+
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
@@ -21,8 +21,14 @@ class LoginContainer extends Component{
     handleSubmit = (event) => {
         event.preventDefault()
         this.props.loginUser(this.state)
+        this.setState({
+          first_name: '',
+          last_name: '',
+          username: '',
+          password: ''
+        })
     }
-    
+
     changeForm = (event) => {
         this.setState({
             formStatus: event.target.dataset.name

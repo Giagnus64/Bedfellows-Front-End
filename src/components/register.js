@@ -9,10 +9,10 @@ const Register = (props) => {
                     <>
                     <h2>Register</h2>
                     <Form.Group widths="equal" inline>
-                        <Form.Input label="First Name" type="text" placeholder="First Name" value={props.formState.first_name} onChange={props.handleChange} />
+                        <Form.Input label="First Name" type="text" placeholder="First Name" value={props.formState.first_name} onChange={props.handleChange} name="first_name" />
                     </Form.Group>
                     <Form.Group widths="equal" inline>
-                        <Form.Input label="Last Name" type="text" placeholder="Last Name" value={props.formState.last_name} onChange={props.formState.handleChange} />
+                        <Form.Input label="Last Name" type="text" placeholder="Last Name" value={props.formState.last_name} onChange={props.handleChange} name="last_name" />
                     </Form.Group>
                     </>
             )
@@ -34,7 +34,7 @@ const Register = (props) => {
             <Form.Button>Submit</Form.Button>
         </Form>
     )
-    
+
 }
 
 export default Register;
