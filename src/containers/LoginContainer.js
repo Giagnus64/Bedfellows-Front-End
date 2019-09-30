@@ -1,30 +1,47 @@
 import React, { Component } from 'react';
-import {Card} from 'semantic-ui-react';
-import Login from '../components/login'
+import {Card, Menu} from 'semantic-ui-react';
 import Register from '../components/register'
+
 
 class LoginContainer extends Component{
     
-
     state = {
-        login: false
+        first_name: '',
+        last_name: '',
+        username: '',
+        password: '',
+        formStatus: 'register'
     }
-
-    handleUserForm = () => {
-       if(this.state.login){
-        return (<Login />)
-       } else {
-        return (<Register/>)
-       }
+    
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
-
-
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.props.loginUser(this.state)
+    }
+    
+    changeForm = (event) => {
+        this.setState({
+            formStatus: event.target.dataset.name
+        })
+    }
 
     render() {
         return (
             <div className="loginContainer">
-                <Card>
-                {this.handleUserForm()}
+                <Menu tabular className="login-menu">
+                    <Menu.Item data-name="login" active={this.state.formStatus === "login"} className="menu-item" onClick={this.changeForm}>
+                        Login
+                    </Menu.Item>
+                    <Menu.Item data-name="register" active={this.state.formStatus === 'register'} className="menu-item" onClick={this.changeForm}>
+                        Register
+                    </Menu.Item>
+                </Menu>
+                <Card className="login-card">
+                <Register formState={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
                 </Card>
             </div>
         )

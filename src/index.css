@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.ui.card.login-card{
+  padding:40px;
+  min-width:400px;
+  margin-top: 0;
+  min-height: 380px;
+  /* center this somehow*/
+}
+
+.ui.tabular.menu.login-menu{
+  margin-bottom:1px;
+  border-bottom:none;
+  border:none;
+}
+
+.ui.tabular.menu.login-menu a{
+  background-color:white;
+  border:none;
+  border-top-left-radius: 0.285714rem !important;
+  border-top-right-radius: 0.285714rem !important;
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+.ui.tabular.menu.login-menu a.active{
+  background-color:skyblue;
+}
+
+a.ui.tabular.menu.login-menu{
+  background-color:white;
+}

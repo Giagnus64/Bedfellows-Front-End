@@ -1,36 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Form } from 'semantic-ui-react';
 
-class Register extends Component {
-    state = {
-        first_name: '',
-        last_name: '',
-        username: '',
-        password: ''
+const Register = (props) => {
 
+   const getForm = () => {
+        if (props.formState.formStatus === "register"){
+            return (
+                    <>
+                    <h2>Register</h2>
+                    <Form.Group widths="equal" inline>
+                        <Form.Input label="First Name" type="text" placeholder="First Name" value={props.formState.first_name} onChange={props.handleChange} />
+                    </Form.Group>
+                    <Form.Group widths="equal" inline>
+                        <Form.Input label="Last Name" type="text" placeholder="Last Name" value={props.formState.last_name} onChange={props.formState.handleChange} />
+                    </Form.Group>
+                    </>
+            )
+        } else {
+            return <h2>Login</h2>
+        }
     }
 
 
-    render() {
-        return (
-            <Form>
-                <Form.Group widths="equal" inline>
-                    <Form.Input label="First Name" type="text" placeholder="First Name" value={this.state.first_name} />
-                </Form.Group>
-                <Form.Group widths="equal" inline>
-                    <Form.Input label="Last Name" type="text" placeholder="Last Name" value={this.state.last_name} />
-                </Form.Group>
-                <Form.Group widths="equal" inline>
-                    <Form.Input label="Username" type="text" placeholder="Username" value={this.state.username} />
-                </Form.Group>
-                <Form.Group widths="equal" inline>
-                    <Form.Input label="Password" type="password" placeholder="Password" value={this.state.password} />
-                </Form.Group>
-                <Form.Button>Submit</Form.Button>
-            </Form>
-        )
-
-    }
+    return (
+        <Form onSubmit={props.handleSubmit}>
+        {getForm()}
+            <Form.Group widths="equal" inline>
+                <Form.Input label="Username" type="text" placeholder="Username" name="username" value={props.formState.username} onChange={props.handleChange}/>
+            </Form.Group>
+            <Form.Group widths="equal" inline>
+                <Form.Input label="Password" type="password" placeholder="Password" name="password" value={props.formState.password} onChange={props.handleChange}/>
+            </Form.Group>
+            <Form.Button>Submit</Form.Button>
+        </Form>
+    )
+    
 }
 
 export default Register;

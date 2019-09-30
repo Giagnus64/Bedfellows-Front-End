@@ -9,10 +9,14 @@ class App extends Component {
     currentUser: 1
   }
 
+  loginUser = (creds) => {
+    console.log(creds)
+  }
+
   render(){
     return (
     <div className="App">
-          <LoginContainer currLogin={this.state} />
+          <LoginContainer currLogin={this.state} loginUser={this.loginUser} />
       </div>
     );
   }
