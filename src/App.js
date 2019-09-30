@@ -140,7 +140,12 @@ class App extends Component {
         token: localStorage.token,
         currentUserID: localStorage.user_id
       })
-      //fetch(url + `users`)
+      fetch(url + `/users/${localStorage.user_id}`, 
+      { headers: {"Authorization": localStorage.token}})
+      .then(res => res.json())
+      .then(data => this.setState({
+          currentUser: data
+      }))
     }
   }
 
