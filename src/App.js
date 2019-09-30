@@ -89,14 +89,15 @@ class App extends Component {
   navItems = () => {
     if(this.state.token){
       return (<>
-      <Menu.Item name='Home'/>
-        <Menu.Item name='Edit User'/>
+        <NavLink to="/"><Menu.Item name='Profile' /></NavLink>
+        <NavLink to="/"><Menu.Item name='Dates'/></NavLink>        
+        <NavLink to="/"><Menu.Item name='Budget'/></NavLink>        
         <Menu.Item name='Logout' onClick={this.logout}/>
         </>)
     }
   }
   logout =() =>{
-    localStorage.removeItem("token")
+    localStorage.clear();
     this.setState({
       loggedIn: false,
       currentUserID: null,
@@ -121,12 +122,12 @@ class App extends Component {
         <Route
           path='/home'
           exact
-          render={ () => this.state.token ? <Landing currentUser={this.state.currentUser} /> : <Redirect to='/login' /> }
+          render={ (props) => this.state.token ? <Landing currentUser={this.state.currentUser} /> : <Redirect to='/login' /> }
         />
         <Route
           exact
           path='/'
-          render={ () => this.state.token ? <Redirect to='/home' /> : <Redirect to='/login' /> }
+          render={ (props) => this.state.token ? <Redirect to='/home' /> : <Redirect to='/login' /> }
         />
         <Route component={ NotFound } />
         </Switch>
