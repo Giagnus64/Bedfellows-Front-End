@@ -52,6 +52,7 @@ class App extends Component {
           })
         }
         localStorage.token = user.token
+        localStorage.user_id = user.id
       })
   }
 
@@ -80,17 +81,18 @@ class App extends Component {
             token: user.token
           })
           localStorage.token = user.token
+          localStorage.user_id = user.id
         }
       })
   }
 
   navItems = () => {
-    if(this.state.loggedIn){
-      return (<div className="navItems">
+    if(this.state.token){
+      return (<>
       <Menu.Item name='Home'/>
         <Menu.Item name='Edit User'/>
         <Menu.Item name='Logout' onClick={this.logout}/>
-        </div>)
+        </>)
     }
   }
   logout =() =>{
@@ -136,9 +138,9 @@ class App extends Component {
     if (localStorage.token) {
       this.setState({
         token: localStorage.token,
-        loggedIn: true
+        currentUserID: localStorage.user_id
       })
-      // fetch user
+      //fetch(url + `users`)
     }
   }
 
