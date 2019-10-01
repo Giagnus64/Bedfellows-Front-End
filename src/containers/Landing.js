@@ -13,7 +13,9 @@ class Landing extends React.Component {
       fetch(url + `/users/${localStorage.user_id}`,
         { headers: { "Authorization": localStorage.token } })
       .then(res => res.json())
-      .then(console.log)
+      .then((data) => {
+        console.log("from landing component did mount", data);
+      })
     }
   }
 

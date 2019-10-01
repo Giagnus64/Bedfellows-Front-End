@@ -43,3 +43,18 @@ code {
 a.ui.tabular.menu.login-menu{
   background-color:white;
 }
+
+.ui.segment.profileSegment {
+  font-size: 2rem;
+
+  &:before {
+    padding: 40px;
+  }
+  &:hover {
+    border: 3px solid #FFC0CB;
+
+    &:before {
+			box-shadow: 0 60px 40px -40px rgba(31, 31, 31, 0.5);
+    }
+  }
+}

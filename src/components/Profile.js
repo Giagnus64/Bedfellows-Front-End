@@ -1,11 +1,11 @@
 import React from 'react';
-
+import UserDetailsContainer from '../containers/UserDetailsContainer'
 
 class Profile extends React.Component {
 
   render() {
     return (
-      <h1>"This is a profile page"</h1>
+        <UserDetailsContainer currentUser={this.props.currentUser} />
     )
   }
 

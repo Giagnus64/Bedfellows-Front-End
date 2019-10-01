@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import { Menu } from "semantic-ui-react";
 import LoginContainer from "./containers/LoginContainer";
 import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
@@ -91,7 +91,7 @@ class App extends Component {
   navItems = () => {
     if(this.state.token){
       return (<>
-        <NavLink to="/"><Menu.Item name='Profile' /></NavLink>
+        <NavLink to="/profile"><Menu.Item name='Profile' /></NavLink>
         <NavLink to="/"><Menu.Item name='Dates'/></NavLink>
         <NavLink to="/"><Menu.Item name='Budget'/></NavLink>
         <Menu.Item name='Logout' onClick={this.logout}/>
@@ -119,7 +119,7 @@ class App extends Component {
           <Route
             path='/login'
             exact
-            render={ (props) => this.state.token ? <Redirect to='/home' /> : <LoginContainer currLogin={this.state} loginUser={this.loginUser} /> }
+            render={ (props) => this.state.token ? <Redirect to='/profile' /> : <LoginContainer currLogin={this.state} loginUser={this.loginUser} /> }
           />
         <Route
           path='/home'
@@ -134,7 +134,7 @@ class App extends Component {
         <Route
           exact
           path='/'
-          render={ (props) => this.state.token ? <Redirect to='/home' /> : <Redirect to='/login' /> }
+          render={ (props) => this.state.token ? <Redirect to='/profile' /> : <Redirect to='/login' /> }
         />
         <Route component={ NotFound } />
         </Switch>
