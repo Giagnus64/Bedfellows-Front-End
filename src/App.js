@@ -106,13 +106,12 @@ class App extends Component {
   }
 
   render(){
-    return (
+    return (<>
+      <Menu inverted className="top" id="navbar">
+        <Menu.Item header>BedFellows</Menu.Item>
+        {this.navItems()}
+      </Menu>
     <div className="App">
-        <Menu inverted className="fixed top">
-          <Menu.Item header>BedFellows</Menu.Item>
-          {this.navItems()}
-          
-        </Menu>
         <Switch>
           <Route
             path='/login'
@@ -132,6 +131,7 @@ class App extends Component {
         <Route component={ NotFound } />
         </Switch>
     </div>
+    </>
     );
   }
 

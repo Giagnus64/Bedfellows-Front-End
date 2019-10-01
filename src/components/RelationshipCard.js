@@ -27,7 +27,7 @@ const RelationshipCard = (props) => {
         } else{
             return (
                 <div className='ui two buttons'>
-                    <Button basic color='blue'>
+                    <Button basic color='blue' onClick={ () => props.getCurrentRelationship(props.relationship)}>
                         See Relationship
                     </Button>
                     

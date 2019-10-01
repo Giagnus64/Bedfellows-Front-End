@@ -49,11 +49,13 @@ a.ui.tabular.menu.login-menu{
 #header-username{
   margin-left: auto;
 }
-.ui.inverted.fixed.top.menu{
-  font-size: 1.3rem;
+
+#navbar{
+  top:0;
+  width:100%;
+  margin-bottom:0;
+  font-size: 1.5rem;
 }
-
-
 
 /*  relationships page */
 .ui.fluid.container.relationship-container{
@@ -62,7 +64,7 @@ a.ui.tabular.menu.login-menu{
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 10px auto;
   width: 80%;
 }
 .ui.cards{
@@ -73,3 +75,10 @@ a.ui.tabular.menu.login-menu{
   text-align: center;
 }
 /* relationship card */
+#relationship-show-container{
+  width: 60%;
+  background-color: white;
+  border-radius: 5px;
+  margin: 20px auto;
+}
+
