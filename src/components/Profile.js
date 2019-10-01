@@ -5,7 +5,10 @@ class Profile extends React.Component {
 
   render() {
     return (
-        <UserDetailsContainer currentUser={this.props.currentUser} />
+        <UserDetailsContainer
+          currentUser={this.props.currentUser}
+          editUserInfo={this.props.editUserInfo}
+        />
     )
   }
 

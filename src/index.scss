@@ -1,8 +1,26 @@
+/* VARIABLES */
+$background-color: white;
+$main-font-1: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+$main-font-2: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+
+/* MIXINS (invoke with @include 'mixin-name')*/
+@mixin flexbox-base($display, $direction, $align, $justify){
+  display: $display;
+  flex-direction: $direction;
+  align-content: $align;
+  justify-content: $justify;
+}
+
+/* FUNCTIONS-like objects (to use: @extend %'function-name') */
+%example{
+  border-radius: 2px;
+  border: 2px solid;
+}
+
+/* STYLE */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: $main-font-1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -26,7 +44,7 @@ code {
 }
 
 .ui.tabular.menu.login-menu a{
-  background-color:white;
+  background-color: $background-color;
   border:none;
   border-top-left-radius: 0.285714rem !important;
   border-top-right-radius: 0.285714rem !important;
@@ -34,25 +52,24 @@ code {
   border-bottom-left-radius: 0px !important;
 }
 .ui.tabular.menu.login-menu a:hover{
-  background-color:white;
+  background-color: $background-color;
 }
 .ui.tabular.menu.login-menu a.active{
-  background-color:skyblue;
+  background-color: skyblue;
 }
 
 a.ui.tabular.menu.login-menu{
-  background-color:white;
+  background-color: $background-color;
 }
 
 .ui.segment.profileSegment {
   font-size: 2rem;
-
   &:before {
     padding: 40px;
   }
   &:hover {
     border: 3px solid #FFC0CB;
-
+    background-color: lighten(#FFC0CB, 10%);
     &:before {
 			box-shadow: 0 60px 40px -40px rgba(31, 31, 31, 0.5);
     }

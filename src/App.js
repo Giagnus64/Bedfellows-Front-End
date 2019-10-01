@@ -19,6 +19,25 @@ class App extends Component {
     token: null
   }
 
+  editUserInfo = (columnName) => {
+    console.log(columnName)
+
+    // [NEED TO PUT THIS CALLBACK ON NEW EDIT FORM BUTTON]
+    // const config = {
+    //   method: "PATCH",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Accept": "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     columnName:
+    //   })
+    // }
+    // fetch(url+"/users/"+this.state.currentUserID)
+    //   .then(r => r.json())
+    //   .then(console.log())
+  }
+
   loginUser = (creds) => {
     // console.log(creds)
     if (creds.formStatus === "register") {
@@ -129,7 +148,7 @@ class App extends Component {
         <Route
           path='/profile'
           exact
-          render={ () => this.state.token ? <Profile currentUser={this.state.currentUser} /> : <Redirect to='/login' /> }
+          render={ () => this.state.token ? <Profile currentUser={this.state.currentUser} editUserInfo={this.editUserInfo} /> : <Redirect to='/login' /> }
         />
         <Route
           exact

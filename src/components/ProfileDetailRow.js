@@ -1,11 +1,35 @@
 import React from 'react';
-import {Segment, Grid, Button, Divider} from 'semantic-ui-react';
+import {Segment, Grid, Button, Divider, Input} from 'semantic-ui-react';
 
-import UserDetailsContainer from '../containers/UserDetailsContainer'
+class ProfileDetailRow extends React.Component {
 
-const ProfileDetailRow = (props) => {
+  state = {
+    isEditing: false
+  }
 
+  renderForm = () => {
+    return (
+      <>
+        <Input />
+        <Button onClick={ () => {
+            this.props.editUserInfo(this.props.column)
+            this.setState({
+              isEditing: !this.state.isEditing
+            })
+          } }>Save</Button>
+      </>
+    )
+  }
+  renderButton = () => {
+    return <Button onClick={ () => {
+        console.log("edit button")
+        this.setState({
+          isEditing: !this.state.isEditing
+        })
+      } }>Edit</Button>
+  }
 
+  render() {
     return (
       <Segment
         className="profileSegment"
@@ -13,18 +37,16 @@ const ProfileDetailRow = (props) => {
         raised>
         <Grid columns={2} relaxed='very'>
           <Grid.Column>
-            <p>
-              {props.label + ": " + props.info }
-            </p>
+            <p>{this.props.label + ": " + this.props.info }</p>
           </Grid.Column>
           <Grid.Column>
-            <Button>Edit</Button>
+            {this.state.isEditing ? this.renderForm() : this.renderButton()}
           </Grid.Column>
         </Grid>
         <Divider vertical></Divider>
       </Segment>
     )
-
+  }
 
 }
 

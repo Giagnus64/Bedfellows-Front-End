@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Header, Segment, Grid, Divider, Button } from 'semantic-ui-react'
+import { Container, Header, Segment} from 'semantic-ui-react'
 import ProfileDetailRow from '../components/ProfileDetailRow'
 
 const UserDetailsContainer = (props) => {
@@ -16,15 +16,41 @@ const UserDetailsContainer = (props) => {
   return (
     <div style={divStyle}>
       <Container fluid>
+
       <Segment raised>
         <Header as='h1' textAlign="center" attached="top">{"Your Profile Details"}</Header>
       </Segment>
         <Segment.Group size="massive">
-          <ProfileDetailRow label={"First Name"} info={props.currentUser.first_name}/>
-          <ProfileDetailRow label={"Last Name"} info={props.currentUser.last_name}/>
-          <ProfileDetailRow label={"Username"} info={props.currentUser.username}/>
-          <ProfileDetailRow label={"Email"} info={props.currentUser.email}/>
-          <ProfileDetailRow label={"About"} info={props.currentUser.bio}/>
+          <ProfileDetailRow
+            label={"First Name"}
+            column={"first_name"}
+            info={props.currentUser.first_name}
+            editUserInfo={props.editUserInfo}
+          />
+          <ProfileDetailRow
+            label={"Last Name"}
+            column={"last_name"}
+            info={props.currentUser.last_name}
+            editUserInfo={props.editUserInfo}
+          />
+          <ProfileDetailRow
+            label={"Username"}
+            column={"username"}
+            info={props.currentUser.username}
+            editUserInfo={props.editUserInfo}
+          />
+          <ProfileDetailRow
+            label={"Email"}
+            column={"email"}
+            info={props.currentUser.email}
+            editUserInfo={props.editUserInfo}
+          />
+          <ProfileDetailRow
+            label={"About"}
+            column={"bio"}
+            info={props.currentUser.bio}
+            editUserInfo={props.editUserInfo}
+          />
         </Segment.Group>
 
       </Container>
