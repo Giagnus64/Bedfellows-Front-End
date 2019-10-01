@@ -11,6 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* login card*/
 .ui.card.login-card{
   padding:40px;
   min-width:400px;
@@ -43,3 +45,31 @@ code {
 a.ui.tabular.menu.login-menu{
   background-color:white;
 }
+/* navbar*/
+#header-username{
+  margin-left: auto;
+}
+.ui.inverted.fixed.top.menu{
+  font-size: 1.3rem;
+}
+
+
+
+/*  relationships page */
+.ui.fluid.container.relationship-container{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 80%;
+}
+.ui.cards{
+  justify-content:center;
+}
+#relationships-header{
+  width: 100%;
+  text-align: center;
+}
+/* relationship card */

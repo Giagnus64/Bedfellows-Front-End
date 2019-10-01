@@ -1,24 +1,40 @@
 import React from 'react';
 import { Card, Button} from 'semantic-ui-react';
 
+// if asked = true, user has been asked
 const RelationshipCard = (props) => {
     console.log(props)
     const status = props.relationship.status
 
     const getButtons = () => {
-        //check status and display Accept/Decline if pending and youve been asked
-        //display see relationship/edit relationship if confirmed
-        //display denied if denied
-        
+        if(status === "pending"){
+            if(props.asked){
+                return (
+                <div className='ui two buttons'>
+                    <Button basic color='green'>
+                        Approve
+                    </Button>
+                    <Button basic color='red'>
+                        Decline
+                    </Button>
+                </div>
+                )
+            } else {
+                return (<h3 className="pending-text">Relationship pending...</h3>)
+            }
+        } else if(status === "denied") {
+            return (<h3 className="denied-text">Relationship Denied</h3>)
+        } else{
+            return (
+                <div className='ui two buttons'>
+                    <Button basic color='blue'>
+                        See Relationship
+                    </Button>
+                    
+                </div>
+            )
+        }   
     }
-    //make new relationship form
-    //edit relationship form
-    //seed some data for relationship stuff
-    // put relationship data in cards
-
-    //css ideas - make nave bigger make cards bigger desc text smaller and placement once forms are up
-
-
 
     const getStatus = () => {
         const name = props.partner.first_name
@@ -32,31 +48,27 @@ const RelationshipCard = (props) => {
             }
         } else {
             if(status === "denied") {
-                return `${name} has denied you relationship request.`;
+                return `${name} has denied your relationship request.`;
             } else if(status === "pending") {
-                return `Your relationship request to ${name} is still pending>`;
+                return `Your relationship request to ${name} is still pending.`;
             } else{
                 return `You are in a relationship with ${name}!`
             }
         } 
     }
 
-    return (<Card>
+    return (<Card className="relationship-card" style={{ minWidth: "400px"}}>
             <Card.Content>
             <Card.Header>{props.partner.first_name + " " + props.partner.last_name}</Card.Header>
-                <Card.Description>
+                <Card.Description style={ 
+                    {fontSize: "0.8em",   
+                    } 
+                    }>
                 {`Status: ${getStatus()}`}
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <div className='ui two buttons'>
-                    <Button basic color='green'>
-                        Approve
-          </Button>
-                    <Button basic color='red'>
-                        Decline
-          </Button>
-                </div>
+            {getButtons()}
             </Card.Content>
         </Card>
         )

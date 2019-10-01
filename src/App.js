@@ -91,6 +91,7 @@ class App extends Component {
         <NavLink to="/"><Menu.Item name='Dates'/></NavLink>        
         <NavLink to="/"><Menu.Item name='Budget'/></NavLink>        
         <Menu.Item name='Logout' onClick={this.logout}/>
+        <Menu.Item className="header-welcome" id="header-username">{`Logged in as ${this.state.currentUser.username}`}</Menu.Item>
         </>)
     }
   }
@@ -110,6 +111,7 @@ class App extends Component {
         <Menu inverted className="fixed top">
           <Menu.Item header>BedFellows</Menu.Item>
           {this.navItems()}
+          
         </Menu>
         <Switch>
           <Route

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Dimmer, Loader } from 'semantic-ui-react';
+import { Card, Button, Dimmer, Loader, Container } from 'semantic-ui-react';
 import RelationshipCard from "../components/RelationshipCard";
 
 const url = "http://localhost:3000"
@@ -34,12 +34,12 @@ class Landing extends React.Component {
   render() {
     
     return (<>
-    <div className="relationship-container">
-      <h1>Relationships</h1>
+      <h1 id="relationships-header">Relationships</h1>
+    <Container fluid className="relationship-container">
       <Card.Group>
       {this.getRelationshipCards()}
       </Card.Group>
-    </div>
+    </Container>
     </>
     )
   }
@@ -47,3 +47,7 @@ class Landing extends React.Component {
 }
 
 export default Landing;
+ //make new relationship form
+    //edit relationship form
+    //seed some data for relationship stuff
+    // put relationship data in cards
