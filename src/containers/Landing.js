@@ -10,14 +10,31 @@ class Landing extends React.Component {
   state = {
     currentRel: '',
     displayRel: false,
+    relationships: [], 
   }
 
-  handleChange = () => {
+  componentDidMount = () => {
 
-  }
-
-  handleSubmit = () => {
-
+  }  
+  
+  updateRelationship = (relAttributes) => {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": localStorage.token
+      },
+      body:JSON.stringify({
+        ...relAttributes
+      })
+    }
+    fetch(url + `/relationships/${this.state.currentRel.id}`, options)
+    .then(res => res.json())
+    .then(data => this.setState({
+      currentRel: data
+    }), console.log(this.state))
+    
   }
 
   getRelationshipCards = () => {
@@ -30,7 +47,6 @@ class Landing extends React.Component {
         </Dimmer>
       )
     } else{
-     console.log(this.props.currentUser)
      const askedArr = this.props.currentUser.asked_for_relationships.map((asked) => {
           return (<RelationshipCard 
             asked={true} 
@@ -73,9 +89,10 @@ class Landing extends React.Component {
     </Container>
     <br></br>
       {this.state.displayRel ? <RelationshipSpecs 
-        partner={this.state.currentRel.askee ? this.state.currentRel.askee : this.state.currentRel.asker} 
+        partner={localStorage.user_id === this.state.currentRel.askee_id ? this.state.currentRel.asker : this.state.currentRel.askee} 
         relationship={this.state.currentRel}
-        handleChange={this.handleChange}/> : false }
+        updateRelationship={this.updateRelationship}
+        /> : false }
     </>
     )
   }
@@ -83,7 +100,3 @@ class Landing extends React.Component {
 }
 
 export default Landing;
- //make new relationship form
-    //edit relationship form
-    //seed some data for relationship stuff
-    // put relationship data in cards

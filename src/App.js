@@ -95,7 +95,7 @@ class App extends Component {
         </>)
     }
   }
-  logout =() =>{
+  logout = () =>{
     localStorage.clear();
     this.setState({
       loggedIn: false,

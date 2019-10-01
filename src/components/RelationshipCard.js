@@ -3,9 +3,7 @@ import { Card, Button} from 'semantic-ui-react';
 
 // if asked = true, user has been asked
 const RelationshipCard = (props) => {
-    console.log(props)
     const status = props.relationship.status
-
     const getButtons = () => {
         if(status === "pending"){
             if(props.asked){
