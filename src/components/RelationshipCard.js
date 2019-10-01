@@ -9,10 +9,10 @@ const RelationshipCard = (props) => {
             if(props.asked){
                 return (
                 <div className='ui two buttons'>
-                    <Button basic color='green'>
+                    <Button onClick={() => handleUpdate("confirmed")}basic color='green'>
                         Approve
                     </Button>
-                    <Button basic color='red'>
+                    <Button onClick={() => handleUpdate("denied")} basic color='red'>
                         Decline
                     </Button>
                 </div>
@@ -53,6 +53,9 @@ const RelationshipCard = (props) => {
                 return `You are in a relationship with ${name}!`
             }
         } 
+    }
+    const handleUpdate = (status) => {
+        props.updateRelationshipStatus(status, props.relationship.id)
     }
 
     return (<Card className="relationship-card" style={{ minWidth: "400px"}}>

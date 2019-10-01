@@ -91,7 +91,7 @@ class App extends Component {
         <NavLink to="/"><Menu.Item name='Dates'/></NavLink>        
         <NavLink to="/"><Menu.Item name='Budget'/></NavLink>        
         <Menu.Item name='Logout' onClick={this.logout}/>
-        <Menu.Item className="header-welcome" id="header-username">{`Logged in as ${this.state.currentUser.username}`}</Menu.Item>
+        <Menu.Item className="header-welcome" id="header-username">{`Logged in as ${this.state.currentUser.first_name + " " + this.state.currentUser.last_name}`}</Menu.Item>
         </>)
     }
   }
@@ -121,7 +121,7 @@ class App extends Component {
         <Route
           path='/home'
           exact
-          render={ (props) => this.state.token ? <Landing currentUser={this.state.currentUser} /> : <Redirect to='/login' /> }
+          render={ (props) => this.state.token ? <Landing /> : <Redirect to='/login' /> }
         />
         <Route
           exact

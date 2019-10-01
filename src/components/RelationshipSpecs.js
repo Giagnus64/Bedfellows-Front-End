@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Modal, List, Button, Header, Form } from "semantic-ui-react";
+import { Container, Modal, List, Button, Header, Icon} from "semantic-ui-react";
 import EditRelationshipForm from './EditRelationshipForm'
 
 class RelationshipSpecs extends React.Component {
@@ -18,10 +18,15 @@ class RelationshipSpecs extends React.Component {
     render(){
         return (
             <Container fluid id="relationship-show-container" style={{ paddingTop: "20px", paddingBottom: "20px" }}>
+                <Icon name='x' style={
+                    {position:'absolute',
+                     right:'7px'   
+                    }}
+                    onClick={this.props.closeShowDiv}/>
                 <h1>Your Relationship with {this.props.partner.first_name + " " + this.props.partner.last_name}</h1>
                 <List bulleted>
-                    <List.Item> Nickname: {this.props.relationship.nickname}</List.Item>
-                    <List.Item> Anniversary: {this.getAnniDate().toLocaleDateString("en-US")}</List.Item>
+                    <List.Item> Nickname: {this.props.relationship.nickname ? this.props.relationship.nickname : "You haven't set a nickname yet." }</List.Item>
+                    <List.Item> Anniversary: {this.props.relationship.anniversary ? this.getAnniDate().toLocaleDateString("en-US"): "You haven't set an anniversary yet."}</List.Item>
                 </List>
                 <h1>Upcoming Dates:</h1>
                 <List bulleted>
