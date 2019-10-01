@@ -18,10 +18,10 @@ class Landing extends React.Component {
     } else{
      console.log(this.props.currentUser)
      const askedArr = this.props.currentUser.asked_for_relationships.map((asked) => {
-          return <RelationshipCard asked={true} key={asked.id} relationship={asked} />
+          return <RelationshipCard asked={true} key={asked.id} relationship={asked} partner={asked.asker}/>
      })
      const askingArr = this.props.currentUser.asking_for_relationships.map((asking) => {
-         return <RelationshipCard  asked={false} key={asking.id} relationship={asking} />
+         return <RelationshipCard  partner={asking.askee} asked={false} key={asking.id} relationship={asking} />
      })
     relationshipCards = [...askedArr, ...askingArr]
     return relationshipCards;
@@ -34,10 +34,12 @@ class Landing extends React.Component {
   render() {
     
     return (<>
-    <h1>Relationships</h1>
-    <Card.Group>
-    {this.getRelationshipCards()}
-    </Card.Group>
+    <div className="relationship-container">
+      <h1>Relationships</h1>
+      <Card.Group>
+      {this.getRelationshipCards()}
+      </Card.Group>
+    </div>
     </>
     )
   }
