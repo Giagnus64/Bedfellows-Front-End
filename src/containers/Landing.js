@@ -144,7 +144,13 @@ class Landing extends React.Component {
            />)
      })
     relationshipCards = [...askedArr, ...askingArr]
-    return relationshipCards;
+    if (relationshipCards.length === 0){
+      console.log("no rel cards!")
+      return (<h1>You don't have any relationships yet!</h1>)
+    } else{
+      return relationshipCards;
+    }
+    
     }
   }
 //***************** */
