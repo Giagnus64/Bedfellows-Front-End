@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Form, Message } from 'semantic-ui-react';
 
 const Register = (props) => {
 
@@ -23,7 +23,7 @@ const Register = (props) => {
 
 
     return (
-        <Form onSubmit={props.handleSubmit}>
+        <Form onSubmit={props.handleSubmit} error={props.errorState}>
         {getForm()}
             <Form.Group widths="equal" inline>
                 <Form.Input label="Username" type="text" placeholder="Username" name="username" value={props.formState.username} onChange={props.handleChange}/>
@@ -32,6 +32,11 @@ const Register = (props) => {
                 <Form.Input label="Password" type="password" placeholder="Password" name="password" value={props.formState.password} onChange={props.handleChange}/>
             </Form.Group>
             <Form.Button>Submit</Form.Button>
+            <Message
+                error
+                header='Action Forbidden'
+                content={props.errorText}
+            />
         </Form>
     )
 

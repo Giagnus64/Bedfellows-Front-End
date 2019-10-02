@@ -11,7 +11,7 @@ class Landing extends React.Component {
   state = {
     currentRel: '',
     displayRel: false,
-    currentUser: {}, 
+    currentUser: this.props.currentUser, 
     currentUserId: localStorage.user_id,
     strangers: [], 
     selectedUserId: ''
@@ -23,8 +23,9 @@ class Landing extends React.Component {
 //**************
  
   componentDidMount = () => {
-    if(localStorage.user_id){
+    if(localStorage.user_id || this.props.currentUser){
       this.getCurrentUser();
+      console.log('landing mounted')
     }
   }  
 
@@ -110,6 +111,7 @@ class Landing extends React.Component {
 // getRelationshipCards
 //******************************************************** */
   getRelationshipCards = () => {
+    console.log("getting relationship cards")
     let relationshipCards = [];
     if(!this.state.currentUser.asking_for_relationships){
       console.log("hit dimmer!")
@@ -119,6 +121,7 @@ class Landing extends React.Component {
         </Dimmer>
       )
     } else{
+      console.log("found rel cards")
      const askedArr = this.state.currentUser.asked_for_relationships.map((asked) => {
           return (<RelationshipCard 
             asked={true} 
@@ -231,6 +234,7 @@ updateRelationshipStatus = (status, id) => {
         partner={this.state.currentRel.asker ? this.state.currentRel.asker : this.state.currentRel.askee} 
         relationship={this.state.currentRel}
         updateRelationship={this.updateRelationship}
+        updateRelationshipStatus={this.updateRelationshipStatus}
         closeShowDiv={this.closeShowDiv}
         /> : false }
     </>

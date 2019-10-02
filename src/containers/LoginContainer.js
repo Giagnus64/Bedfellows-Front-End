@@ -30,6 +30,7 @@ class LoginContainer extends Component{
     }
 
     changeForm = (event) => {
+        this.props.removeFormError();
         this.setState({
             formStatus: event.target.dataset.name
         })
@@ -47,7 +48,7 @@ class LoginContainer extends Component{
                     </Menu.Item>
                 </Menu>
                 <Card className="login-card">
-                <Register formState={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+                <Register formState={this.state} errorState={this.props.currLogin.formError} errorText={this.props.currLogin.formErrorText} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
                 </Card>
             </div>
         )

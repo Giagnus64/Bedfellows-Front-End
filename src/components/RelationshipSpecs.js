@@ -1,10 +1,11 @@
 import React from 'react';
-import { Container, Modal, List, Button, Header, Icon} from "semantic-ui-react";
+import { Container, Modal, List, Button, Header, Icon, Confirm} from "semantic-ui-react";
 import EditRelationshipForm from './EditRelationshipForm'
 
 class RelationshipSpecs extends React.Component {
     state = { 
         modalOpen: false, 
+        confirmOpen: false
     }
     handleOpen = () => this.setState({ modalOpen: true })
 
@@ -13,6 +14,18 @@ class RelationshipSpecs extends React.Component {
     getAnniDate = () => {
         const anniDate = new Date(Date.parse(this.props.relationship.anniversary))
         return anniDate 
+    }
+
+    openConfirm = () => {
+        this.setState({
+            confirmOpen: true
+        })
+    }
+
+    closeConfirm = () => {
+        this.setState({
+            confirmOpen: false
+        })
     }
     
     render(){
@@ -34,7 +47,8 @@ class RelationshipSpecs extends React.Component {
                 </List>
                 <div className="ui two buttons" style={{ maxWidth: "50%" }}>
                 <Modal
-                    trigger={<Button onClick={this.handleOpen} basic color="blue" style={{ marginRight: "20px" }}>Edit Relationship</Button>}
+                    trigger={
+                    <Button onClick={this.handleOpen} basic color="blue" style={{ marginRight: "20px" }}>Edit Relationship</Button>}
                     open={this.state.modalOpen}
                     onClose={this.handleClose}
                     basic
@@ -48,7 +62,19 @@ class RelationshipSpecs extends React.Component {
                         updateRelationship={this.props.updateRelationship}/>
                     </Modal.Content>
                 </Modal>
-                <Button basic color="red">Deny Relationship</Button>
+                <Button basic color="red"
+                        onClick={this.openConfirm}//() => this.props.handleUpdate("denied")}
+                
+                >Deny Relationship</Button>
+                    <Confirm
+                        open={this.state.confirmOpen}
+                        onCancel={this.closeConfirm}
+                        onConfirm={() => {
+                            this.props.updateRelationshipStatus("denied", this.props.relationship.id);
+                            this.props.closeShowDiv();
+                            this.closeConfirm();
+                        }}
+                    />
                 </div>
             </Container>
         )

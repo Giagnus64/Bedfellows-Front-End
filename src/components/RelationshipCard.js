@@ -62,7 +62,8 @@ const RelationshipCard = (props) => {
             <Card.Content>
             <Card.Header>{props.partner.first_name + " " + props.partner.last_name}</Card.Header>
                 <Card.Description style={ 
-                    {fontSize: "0.8em",   
+                    {fontSize: "0.8em",
+                    lineHeight: "30px"   
                     } 
                     }>
                 {`Status: ${getStatus()}`}

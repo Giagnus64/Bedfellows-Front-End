@@ -14,7 +14,16 @@ class App extends Component {
     loggedIn: false,
     currentUserID: null,
     currentUser: {},
-    token: null
+    token: null,
+    formError: false,
+    formErrorText: ''
+  }
+
+  removeFormError = () =>{
+    this.setState({
+      formError: false,
+      formErrorText: ''
+    })
   }
 
   loginUser = (creds) => {
@@ -40,17 +49,26 @@ class App extends Component {
     fetch(url + `/login`, config)
       .then(r => r.json())
       .then(user => {
-        if (user.message) {console.log(user.message)}
-        else {
+        console.log(user)
+        if (user.messages) {
           this.setState({
+            formError: true,
+            formErrorText: user.messages
+          })
+        }
+        else {
+          localStorage.token = user.token
+          localStorage.user_id = user.id
+          this.setState({
+            formError: false,
+            formErrorText: '',
             loggedIn: true,
             currentUserID: user.id,
             currentUser: user,
             token: user.token
           })
         }
-        localStorage.token = user.token
-        localStorage.user_id = user.id
+        
       })
   }
 
@@ -69,12 +87,18 @@ class App extends Component {
     fetch(url + `/users`, config)
       .then(r => r.json())
       .then(user => {
-        // console.log(user)
-        if (user.message) {console.log(user.message)}
+        if (user.messages) {
+          this.setState({
+            formError: true,
+            formErrorText: user.messages
+          })
+        }
         else {
           localStorage.token = user.token
           localStorage.user_id = user.id
           this.setState({
+            formError: false,
+            formErrorText: '',
             loggedIn: true,
             currentUserID: user.id,
             currentUser: user,
@@ -116,12 +140,12 @@ class App extends Component {
           <Route
             path='/login'
             exact
-            render={ (props) => this.state.token ? <Redirect to='/home' /> : <LoginContainer currLogin={this.state} loginUser={this.loginUser} /> }
+            render={ (props) => this.state.token ? <Redirect to='/home' /> : <LoginContainer currLogin={this.state} removeFormError={this.removeFormError} loginUser={this.loginUser} /> }
           />
         <Route
           path='/home'
           exact
-          render={ (props) => this.state.token ? <Landing /> : <Redirect to='/login' /> }
+          render={ (props) => this.state.token ? <Landing currentUser={this.state.currentUser}/> : <Redirect to='/login' /> }
         />
         <Route
           exact
@@ -137,6 +161,7 @@ class App extends Component {
 
   componentDidMount() {
     if (localStorage.token) {
+      console.log("app mounted")
       this.setState({
         token: localStorage.token,
         currentUserID: localStorage.user_id
