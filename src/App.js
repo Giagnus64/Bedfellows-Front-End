@@ -164,8 +164,8 @@ class App extends Component {
     if(this.state.token){
       return (<>
         <NavLink to="/profile"><Menu.Item name='Profile' /></NavLink>
+        <NavLink to="/home"><Menu.Item name='Relationships'/></NavLink>
         <NavLink to="/"><Menu.Item name='Dates'/></NavLink>
-        <NavLink to="/"><Menu.Item name='Budget'/></NavLink>
         <Menu.Item name='Logout' onClick={this.logout}/>
         <Menu.Item className="header-welcome" id="header-username">{`Logged in as ${this.state.currentUser.first_name + " " + this.state.currentUser.last_name}`}</Menu.Item>
         </>)
