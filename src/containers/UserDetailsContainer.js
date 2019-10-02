@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Header, Segment} from 'semantic-ui-react'
+import { Container, Header, Segment, Form, Button} from 'semantic-ui-react'
 import ProfileDetailRow from '../components/ProfileDetailRow'
 
 const UserDetailsContainer = (props) => {
@@ -51,6 +51,19 @@ const UserDetailsContainer = (props) => {
             info={props.currentUser.bio}
             editUserInfo={props.editUserInfo}
           />
+
+          {/*<Form>
+            <Form.Field>
+              <Button>Delete Profile</Button>
+            </Form.Field>
+          </Form>*/}
+
+          <Segment raised>
+            <Header as='h2' textAlign="center" attached="bottom">{"Delete Profile"}
+              <Form onSubmit={ () => {props.deleteUser(props.currentUser.id)} }><Button id="deleteButton">Delete</Button></Form>
+            </Header>
+          </Segment>
+
         </Segment.Group>
 
       </Container>

@@ -19,23 +19,54 @@ class App extends Component {
     token: null
   }
 
-  editUserInfo = (columnName) => {
-    console.log(columnName)
+  deleteUser = (id) => {
+    localStorage.clear()
+    const config ={
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": this.state.token
+      },
+      body: JSON.stringify({
+        id
+      })
+    }
+    console.log(config)
+    fetch(url+"/users/"+id, config)
+      .then(r => r.json())
+      .then(() => {
+        this.setState({
+          loggedIn: false,
+          currentUserID: null,
+          currentUser: {},
+          token: null
+        })
+      })
+  }
 
-    // [NEED TO PUT THIS CALLBACK ON NEW EDIT FORM BUTTON]
-    // const config = {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Accept": "application/json"
-    //   },
-    //   body: JSON.stringify({
-    //     columnName:
-    //   })
-    // }
-    // fetch(url+"/users/"+this.state.currentUserID)
-    //   .then(r => r.json())
-    //   .then(console.log())
+  editUserInfo = (keyName, value) => {
+    const updatedUser = this.state.currentUser
+    updatedUser[keyName] = value
+    this.setState({
+      // UPDATING DOM/STATE EVEN WITH BELOW COMMENTED OUT
+      currentUser: updatedUser
+    })
+
+    const config = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": this.state.token
+      },
+      body: JSON.stringify({
+        [keyName]: value
+      })
+    }
+    fetch(url+"/users/"+this.state.currentUserID, config)
+      .then(r => r.json())
+      .then(console.log)
   }
 
   loginUser = (creds) => {
@@ -92,7 +123,6 @@ class App extends Component {
     fetch(url + `/users`, config)
       .then(r => r.json())
       .then(user => {
-        // console.log(user)
         if (user.message) {console.log(user.message)}
         else {
           this.setState({
@@ -148,7 +178,7 @@ class App extends Component {
         <Route
           path='/profile'
           exact
-          render={ () => this.state.token ? <Profile currentUser={this.state.currentUser} editUserInfo={this.editUserInfo} /> : <Redirect to='/login' /> }
+          render={ () => this.state.token ? <Profile currentUser={this.state.currentUser} editUserInfo={this.editUserInfo} deleteUser={this.deleteUser} /> : <Redirect to='/login' /> }
         />
         <Route
           exact

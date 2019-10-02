@@ -8,6 +8,7 @@ class Profile extends React.Component {
         <UserDetailsContainer
           currentUser={this.props.currentUser}
           editUserInfo={this.props.editUserInfo}
+          deleteUser={this.props.deleteUser}
         />
     )
   }

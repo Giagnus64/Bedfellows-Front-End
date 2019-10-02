@@ -5,7 +5,8 @@ class ProfileDetailRow extends React.Component {
 
   state = {
     isEditing: false,
-    formValue: ""
+    formValue: "",
+    formName: this.props.column
   }
 
   handleOnChange = (e) => {
@@ -14,27 +15,47 @@ class ProfileDetailRow extends React.Component {
     })
   }
 
+  handleOnSubmit = (e) => {
+    const { column } = this.props
+    const { formValue } = this.state
+    this.props.editUserInfo(column, formValue)
+    this.setState({
+      isEditing: !this.state.isEditing
+    })
+  }
+
+  handleOnCancel = () => {
+    this.setState({
+      isEditing: !this.state.isEditing
+    })
+  }
+
   renderForm = () => {
+    // console.log("from renderForm func: ", this.props.info)
     return (
-      <Form>
+      <Form
+        name={this.props.column}
+        onSubmit={(e) => {this.handleOnSubmit(e)}}
+      >
         <Form.Field>
           <label>Please make changes below...</label>
-          <input placeholder="..." value={this.state.formValue} onChange={(e) => {this.handleOnChange(e)}} />
+          <input
+            placeholder="..."
+            name={this.props.column}
+            value={this.state.formValue}
+            onChange={this.handleOnChange}
+          />
         </Form.Field>
         <Form.Field>
-          <Button onClick={ () => {
-              this.props.editUserInfo(this.props.column)
-              this.setState({
-                isEditing: !this.state.isEditing
-              })
-            } }>Save</Button>
+          <Button>Save</Button>
+          <Button onClick={this.handleOnCancel}>Cancel</Button>
         </Form.Field>
       </Form>
     )
   }
 
   renderButton = () => {
-    console.log(this.props)
+    // console.log("before re-render: ", this.props.info)
     return (
       <Button onClick={ () => {
         this.setState({
@@ -62,6 +83,12 @@ class ProfileDetailRow extends React.Component {
         <Divider vertical></Divider>
       </Segment>
     )
+  }
+
+  componentDidMount() {
+    this.setState({
+      formValue: this.props.info
+    })
   }
 
 }
