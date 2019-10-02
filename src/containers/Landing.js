@@ -10,8 +10,7 @@ class Landing extends React.Component {
 
   state = {
     currentRel: '',
-    displayRel: false,
-    currentUser: this.props.currentUser, 
+    displayRel: false, 
     currentUserId: localStorage.user_id,
     strangers: [], 
     selectedUserId: ''
@@ -20,25 +19,14 @@ class Landing extends React.Component {
 
 //************************** */
 //Set Initial state
-//**************
+//************************** *?
  
   componentDidMount = () => {
     if(localStorage.user_id || this.props.currentUser){
-      this.getCurrentUser();
-      console.log('landing mounted')
+      this.props.getCurrentUser();
+      this.getUserOptions();
     }
   }  
-
-  getCurrentUser = () => {
-    fetch(url + `/users/${this.state.currentUserId}`, 
-    { headers: { "Authorization": localStorage.token }})
-      .then(res => res.json() )
-      .then(data => {
-        this.setState({
-          currentUser: data
-        }, this.getUserOptions)
-      })
-  }
 
   getUserOptions = () => {
     fetch(url + `/users`, 
@@ -93,9 +81,13 @@ class Landing extends React.Component {
     }
     fetch(url + `/relationships/${this.state.currentRel.id}`, options)
     .then(res => res.json())
-    .then(data => this.setState({
+    .then(data => {
+      this.setState({
       currentRel: data
-    }), console.log(this.state))
+      })
+      this.props.getCurrentUser();
+    }
+    )
     
   }
 
@@ -113,7 +105,7 @@ class Landing extends React.Component {
   getRelationshipCards = () => {
     console.log("getting relationship cards")
     let relationshipCards = [];
-    if(!this.state.currentUser.asking_for_relationships){
+    if(!this.props.currentUser.asking_for_relationships){
       console.log("hit dimmer!")
       return (
         <Dimmer active inverted>
@@ -121,8 +113,8 @@ class Landing extends React.Component {
         </Dimmer>
       )
     } else{
-      console.log("found rel cards")
-     const askedArr = this.state.currentUser.asked_for_relationships.map((asked) => {
+      console.log("found rel cards", this.props.currentUser)
+     const askedArr = this.props.currentUser.asked_for_relationships.map((asked) => {
           return (<RelationshipCard 
             asked={true} 
             key={asked.id} 
@@ -133,7 +125,7 @@ class Landing extends React.Component {
             />)
      })
 
-     const askingArr = this.state.currentUser.asking_for_relationships.map((asking) => {
+     const askingArr = this.props.currentUser.asking_for_relationships.map((asking) => {
          return (<RelationshipCard 
           partner={asking.askee} 
           asked={false} 
@@ -174,7 +166,9 @@ updateRelationshipStatus = (status, id) => {
       })
     })
     .then(res => res.json())
-    .then(this.getCurrentUser())
+    .then(data => {
+      this.props.getCurrentUser()
+    })
 }
 
 //*************************************** 
@@ -185,7 +179,7 @@ updateRelationshipStatus = (status, id) => {
     const userId = obj.value
     this.setState({
       selectedUserId: userId
-    }, console.log(this.state))
+    })
   }
 
   handleSubmit = () =>{
@@ -204,7 +198,11 @@ updateRelationshipStatus = (status, id) => {
         }) 
       })
     .then(res => res.json())
-    .then(this.getCurrentUser())
+    .then((data) => {
+      console.log(data, "submit new rel");
+      this.props.getCurrentUser();
+      this.getUserOptions();
+    })
   } 
   //**************************************
   //Close Relationship Show
@@ -216,7 +214,6 @@ updateRelationshipStatus = (status, id) => {
   }
   
   render() {
-    
     return (
     <>
     
@@ -232,7 +229,7 @@ updateRelationshipStatus = (status, id) => {
       <h1 id="relationships-header">Relationships</h1>
     <Container fluid className="relationship-container">
       <Card.Group>
-      {this.state.currentUser ? this.getRelationshipCards(): false}
+      {this.props.currentUser ? this.getRelationshipCards(): false}
       </Card.Group>
     </Container>
     <br></br>
