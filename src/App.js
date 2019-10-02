@@ -16,7 +16,16 @@ class App extends Component {
     loggedIn: false,
     currentUserID: null,
     currentUser: {},
-    token: null
+    token: null,
+    formError: false,
+    formErrorText: ''
+  }
+
+  removeFormError = () =>{
+    this.setState({
+      formError: false,
+      formErrorText: ''
+    })
   }
 
   deleteUser = (id) => {
@@ -70,7 +79,6 @@ class App extends Component {
   }
 
   loginUser = (creds) => {
-    // console.log(creds)
     if (creds.formStatus === "register") {
       this.registerFetch(creds)
     } else {
@@ -93,18 +101,26 @@ class App extends Component {
     fetch(url + `/login`, config)
       .then(r => r.json())
       .then(user => {
-        // console.log(user)
-        if (user.message) {console.log(user.message)}
-        else {
+        console.log(user)
+        if (user.messages) {
           this.setState({
+            formError: true,
+            formErrorText: user.messages
+          })
+        }
+        else {
+          localStorage.token = user.token
+          localStorage.user_id = user.id
+          this.setState({
+            formError: false,
+            formErrorText: '',
             loggedIn: true,
             currentUserID: user.id,
             currentUser: user,
             token: user.token
           })
         }
-        localStorage.token = user.token
-        localStorage.user_id = user.id
+        
       })
   }
 
@@ -123,16 +139,23 @@ class App extends Component {
     fetch(url + `/users`, config)
       .then(r => r.json())
       .then(user => {
-        if (user.message) {console.log(user.message)}
-        else {
+        if (user.messages) {
           this.setState({
+            formError: true,
+            formErrorText: user.messages
+          })
+        }
+        else {
+          localStorage.token = user.token
+          localStorage.user_id = user.id
+          this.setState({
+            formError: false,
+            formErrorText: '',
             loggedIn: true,
             currentUserID: user.id,
             currentUser: user,
             token: user.token
           })
-          localStorage.token = user.token
-          localStorage.user_id = user.id
         }
       })
   }
@@ -144,11 +167,12 @@ class App extends Component {
         <NavLink to="/"><Menu.Item name='Dates'/></NavLink>
         <NavLink to="/"><Menu.Item name='Budget'/></NavLink>
         <Menu.Item name='Logout' onClick={this.logout}/>
+        <Menu.Item className="header-welcome" id="header-username">{`Logged in as ${this.state.currentUser.first_name + " " + this.state.currentUser.last_name}`}</Menu.Item>
         </>)
     }
   }
-  logout =() =>{
-    localStorage.clear()
+  logout = () =>{
+    localStorage.clear();
     this.setState({
       loggedIn: false,
       currentUserID: null,
@@ -158,22 +182,22 @@ class App extends Component {
   }
 
   render(){
-    return (
+    return (<>
+      <Menu inverted className="top" id="navbar">
+        <Menu.Item header>BedFellows</Menu.Item>
+        {this.navItems()}
+      </Menu>
     <div className="App">
-        <Menu inverted className="fixed top">
-          <Menu.Item header>BedFellows</Menu.Item>
-          {this.navItems()}
-        </Menu>
         <Switch>
           <Route
             path='/login'
             exact
-            render={ (props) => this.state.token ? <Redirect to='/profile' /> : <LoginContainer currLogin={this.state} loginUser={this.loginUser} /> }
+            render={ (props) => this.state.token ? <Redirect to='/home' /> : <LoginContainer currLogin={this.state} removeFormError={this.removeFormError} loginUser={this.loginUser} /> }
           />
         <Route
           path='/home'
           exact
-          render={ (props) => this.state.token ? <Landing currentUser={this.state.currentUser} /> : <Redirect to='/login' /> }
+          render={ (props) => this.state.token ? <Landing currentUser={this.state.currentUser}/> : <Redirect to='/login' /> }
         />
         <Route
           path='/profile'
@@ -188,11 +212,13 @@ class App extends Component {
         <Route component={ NotFound } />
         </Switch>
     </div>
+    </>
     );
   }
 
   componentDidMount() {
     if (localStorage.token) {
+      console.log("app mounted")
       this.setState({
         token: localStorage.token,
         currentUserID: localStorage.user_id
