@@ -18,7 +18,7 @@ class Landing extends React.Component {
 
 
 //************************** */
-//Set Initial state
+//Set state of APP and LANDING
 //************************** *?
  
   componentDidMount = () => {
@@ -54,6 +54,7 @@ class Landing extends React.Component {
         })
       })
   }
+  //get object of strangers for addRelationshipSelect
   mapStrangers = (strangersArr) => {
     return strangersArr.map((stranger) => {
       return {
@@ -90,7 +91,7 @@ class Landing extends React.Component {
     )
     
   }
-
+  // display relationship show box
   getCurrentRelationship = (relationship) => {
     console.log("hit get!")
     this.setState({
@@ -174,6 +175,7 @@ updateRelationshipStatus = (status, id) => {
 //*************************************** 
 //add relationship form
 //***************************************
+//onchange for controlled user form
   changeSelectedUser = (e,obj) => {
     e.persist()
     const userId = obj.value
@@ -181,7 +183,7 @@ updateRelationshipStatus = (status, id) => {
       selectedUserId: userId
     })
   }
-
+  // submit relationship
   handleSubmit = () =>{
     fetch(url + "/relationships",
       { method: 'POST',
@@ -204,6 +206,7 @@ updateRelationshipStatus = (status, id) => {
       this.getUserOptions();
     })
   } 
+
   //**************************************
   //Close Relationship Show
   //************************************** 
@@ -216,7 +219,6 @@ updateRelationshipStatus = (status, id) => {
   render() {
     return (
     <>
-    
     <Container fluid style={
       {
         display:'flex',
