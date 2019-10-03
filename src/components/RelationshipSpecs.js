@@ -27,6 +27,17 @@ class RelationshipSpecs extends React.Component {
             confirmOpen: false
         })
     }
+    getDates = () => {
+        if(this.props.relationship.outings.length !== 0){
+            return this.props.relationship.outings.map((outing) => {
+                let datetime = new Date(outing.time)
+                return (<List.Item>{`${outing.activity} at ${outing.location} on ${datetime.toLocaleString()}`}</List.Item>)
+            })
+        } else{
+            return (<h3> You have no upcoming dates!</h3>)
+        }
+    }
+
     
     render(){
         return (
@@ -43,7 +54,7 @@ class RelationshipSpecs extends React.Component {
                 </List>
                 <h1>Upcoming Dates:</h1>
                 <List bulleted>
-                    <List.Item>Date 1</List.Item>
+                    {this.getDates()}
                 </List>
                 <div className="ui two buttons" style={{ maxWidth: "50%" }}>
                 <Modal
