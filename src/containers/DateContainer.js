@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Container, Card, Header } from "semantic-ui-react";
 import DateCard from '../components/DateCard'
+import AddDateForm from '../components/AddDateForm'
 
 const url = "http://localhost:3000"
 
@@ -9,10 +11,12 @@ export default class DateContainer extends Component{
         displayDate: false,
         currentDate: '',
         dates: [],
-        selectedUserId: ''
+        selectedUserId: '',
+        partners: []
     }
 
     componentDidMount = () => {
+        //get dates
         fetch(url + `/dates/${localStorage.user_id}`,
             {
                 method: "POST",
@@ -29,7 +33,26 @@ export default class DateContainer extends Component{
                 dates: data
             })
         })
+        //get partners
+        fetch(url + `/partners/${localStorage.user_id}`,
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    "Authorization": localStorage.token
+                }
+            })
+        .then(res => res.json())
+        .then(data => {
+            console.log("partners", data)
+            this.setState({
+                partners: data
+            })
+        })
+        
     }
+
     getDateCards = () => {
         return this.state.dates.map((date) => {
             return(<DateCard
@@ -43,7 +66,25 @@ export default class DateContainer extends Component{
     render(){
         return (
             <>
-            {this.getDateCards()}
+            <Header as="h1">Your Dates</Header>
+                <Container fluid className="date-container">
+                    <Card.Group>
+                {this.getDateCards()}
+                    </Card.Group>
+                </Container>
+                <div
+                        style={
+                            {
+                                marginTop: '10px',
+                                backgroundColor:'white',
+                                padding: '20px',
+                                borderRadius:'5px',
+                                maxWidth: "80%",
+                                margin: "0 auto"
+                            }}
+                        className="add-date-form">
+                    <AddDateForm partnersObj={this.state.partners}/>
+                </div>
             </>
         )
     }

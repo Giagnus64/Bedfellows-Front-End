@@ -4,6 +4,7 @@ import { Card, Button } from 'semantic-ui-react';
 // if asked = true, user has been asked
 const DateCard = (props) => {
     console.log(props)
+    const dateTime = new Date(props.dateData.time)
     
 
     return (<Card className="date-card" style={{ minWidth: "400px" }}>
@@ -15,11 +16,17 @@ const DateCard = (props) => {
                     lineHeight: "30px"
                 }
             }>
-                <p>Time: {props.dateData.time}</p>
+                <p>Time: {dateTime.toLocaleString()}</p>
                 <p>Location: {props.dateData.location}</p>
             </Card.Description>
         </Card.Content>
         <Card.Content extra>
+            <div className='ui two buttons'>
+                <Button basic color='green'>
+                See Date
+                </Button>
+                <Button basic color='red'>Delete Date</Button>
+            </div>
         </Card.Content>
     </Card>
     )

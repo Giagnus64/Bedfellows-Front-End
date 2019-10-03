@@ -104,17 +104,14 @@ class Landing extends React.Component {
 // getRelationshipCards
 //******************************************************** */
   getRelationshipCards = () => {
-    console.log("getting relationship cards")
     let relationshipCards = [];
     if(!this.props.currentUser.asking_for_relationships){
-      console.log("hit dimmer!")
       return (
         <Dimmer active inverted>
           <Loader inverted>Loading</Loader>
         </Dimmer>
       )
     } else{
-      console.log("found rel cards", this.props.currentUser)
      const askedArr = this.props.currentUser.asked_for_relationships.map((asked) => {
           return (<RelationshipCard 
             asked={true} 
@@ -223,7 +220,9 @@ updateRelationshipStatus = (status, id) => {
       {
         display:'flex',
         justifyContent:'center',
-        width:'55%',
+        alignItems:'space-between',
+        flexWrap: 'wrap',
+        width:'85%',
         marginTop:'10px',
         }}>
           {this.state.strangers.length !== 0 ? <AddRelationshipForm strangers={this.state.strangers} changeSelectedUser={this.changeSelectedUser} handleSubmit={this.handleSubmit}/> :<Header>You cannot add any more relationships!</Header> }
