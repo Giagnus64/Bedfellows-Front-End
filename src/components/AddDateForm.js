@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Form, Header } from "semantic-ui-react";
 import { DateTimeInput } from  "semantic-ui-calendar-react";
 
-const url = "http://localhost:3000"
+const url = "https://vast-badlands-33576.herokuapp.com"
 const DEFAULT_STATE = {
     relationship_id: '',
     location: '',

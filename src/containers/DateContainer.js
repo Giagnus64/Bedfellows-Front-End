@@ -3,7 +3,7 @@ import { Container, Card, Header } from "semantic-ui-react";
 import DateCard from '../components/DateCard'
 import AddDateForm from '../components/AddDateForm'
 
-const url = "http://localhost:3000"
+const url = "https://vast-badlands-33576.herokuapp.com"
 
 export default class DateContainer extends Component{
 

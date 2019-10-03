@@ -4,7 +4,7 @@ import RelationshipCard from "../components/RelationshipCard";
 import RelationshipSpecs from "../components/RelationshipSpecs";
 import AddRelationshipForm from "../components/AddRelationshipForm"
 
-const url = "http://localhost:3000"
+const url = "https://vast-badlands-33576.herokuapp.com"
 
 class Landing extends React.Component {
 
