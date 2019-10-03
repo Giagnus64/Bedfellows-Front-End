@@ -62,8 +62,21 @@ export default class DateContainer extends Component{
             key={date.id}
             dateData={date}
             partner={date.relationship.askee ? date.relationship.askee : date.relationship.asker }
+            deleteDate={this.deleteDate}
             />)
         })
+    }
+
+    deleteDate = (id) => {
+        fetch(url + `/outings/${id}`,{
+            method: "DELETE",
+            headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": localStorage.token
+        }})
+        .then(res => res.json())
+        .then(data => this.getDates())
     }
 
     render(){

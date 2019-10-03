@@ -25,7 +25,8 @@ const DateCard = (props) => {
                 <Button basic color='green'>
                 See Date
                 </Button>
-                <Button basic color='red'>Delete Date</Button>
+                <Button basic color='red'
+                onClick={() => props.deleteDate(props.dateData.id)}>Delete Date</Button>
             </div>
         </Card.Content>
     </Card>
