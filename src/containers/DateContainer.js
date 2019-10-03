@@ -17,22 +17,7 @@ export default class DateContainer extends Component{
 
     componentDidMount = () => {
         //get dates
-        fetch(url + `/dates/${localStorage.user_id}`,
-            {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    "Authorization": localStorage.token
-                }
-            })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            this.setState({
-                dates: data
-            })
-        })
+        this.getDates();
         //get partners
         fetch(url + `/partners/${localStorage.user_id}`,
             {
@@ -50,7 +35,25 @@ export default class DateContainer extends Component{
                 partners: data
             })
         })
-        
+    }
+
+    getDates = () => {
+        fetch(url + `/dates/${localStorage.user_id}`,
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    "Authorization": localStorage.token
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                this.setState({
+                    dates: data
+                })
+            })
     }
 
     getDateCards = () => {
@@ -79,11 +82,11 @@ export default class DateContainer extends Component{
                                 backgroundColor:'white',
                                 padding: '20px',
                                 borderRadius:'5px',
-                                maxWidth: "80%",
+                                minWidth: "600px",
                                 margin: "0 auto"
                             }}
                         className="add-date-form">
-                    <AddDateForm partnersObj={this.state.partners}/>
+                    <AddDateForm partnersObj={this.state.partners} getDates={this.getDates}/>
                 </div>
             </>
         )
