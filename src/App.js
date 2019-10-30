@@ -9,7 +9,9 @@ import NotFound from './components/NotFound'
 import Profile from './components/Profile'
 import DateContainer from './containers/DateContainer'
 
-const url = "https://vast-badlands-33576.herokuapp.com"
+// heroku-hosted backend
+//const url = "https://vast-badlands-33576.herokuapp.com"
+const url = "http://localhost:3000"
 
 class App extends Component {
 
