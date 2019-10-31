@@ -6,6 +6,7 @@ import AddRelationshipForm from "../components/AddRelationshipForm"
 
 //heroku backend url
 //const url = "https://vast-badlands-33576.herokuapp.com"
+const url = "http://localhost:3000";
 
 class Landing extends React.Component {
 
