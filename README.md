@@ -4,7 +4,7 @@ A webapp that connects users and allows them to manage their relationships with 
 ## Features
 Users are able request relationships with other users, as well as accept or deny relationship requests. Once in a relationship, users can schedule dates with their relationship partners.  Users can also edit their profile information. 
 
-## Screenshots
+## Demo
 Live Here:[BedFellows](https://bedfellows-client.herokuapp.com/home) Demo Video coming soon!
 
 ## Built with
