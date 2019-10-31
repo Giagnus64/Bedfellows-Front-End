@@ -4,7 +4,8 @@ import RelationshipCard from "../components/RelationshipCard";
 import RelationshipSpecs from "../components/RelationshipSpecs";
 import AddRelationshipForm from "../components/AddRelationshipForm"
 
-const url = "https://vast-badlands-33576.herokuapp.com"
+//heroku backend url
+//const url = "https://vast-badlands-33576.herokuapp.com"
 
 class Landing extends React.Component {
 
@@ -37,7 +38,7 @@ class Landing extends React.Component {
     )
   }
 
-// get ppl not in relationships w user
+// get users not in relationships w logged in user
   handleUserOptions = () => {
     fetch(url + `/strangers/${localStorage.user_id}`, {
       method: 'POST',
@@ -92,8 +93,7 @@ class Landing extends React.Component {
     
   }
   // display relationship show box
-  getCurrentRelationship = (relationship) => {
-    console.log("hit get!")
+  getCurrentRelationship = (relationship) => {``
     this.setState({
       currentRel: relationship,
       displayRel: true
@@ -135,7 +135,6 @@ class Landing extends React.Component {
      })
     relationshipCards = [...askedArr, ...askingArr]
     if (relationshipCards.length === 0){
-      console.log("no rel cards!")
       return (<h1>You don't have any relationships yet!</h1>)
     } else{
       return relationshipCards;

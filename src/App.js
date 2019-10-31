@@ -24,7 +24,8 @@ class App extends Component {
     formErrorText: ''
   }
 
-
+  //checks if user already has login token in localStorage, adds localStorage info to state
+  //gets user info from api using login info
   componentDidMount() {
     if (localStorage.token) {
       console.log("app mounted")
@@ -42,7 +43,7 @@ class App extends Component {
       formErrorText: ''
     })
   }
-
+  //logs out user by deleting local storage
   deleteUser = (id) => {
     localStorage.clear()
     const config ={
@@ -56,7 +57,7 @@ class App extends Component {
         id
       })
     }
-    console.log(config)
+    //delete user fetch request
     fetch(url+"/users/"+id, config)
       .then(r => r.json())
       .then(() => {
@@ -68,12 +69,11 @@ class App extends Component {
         })
       })
   }
-
+  
   editUserInfo = (keyName, value) => {
     const updatedUser = this.state.currentUser
     updatedUser[keyName] = value
     this.setState({
-      // UPDATING DOM/STATE EVEN WITH BELOW COMMENTED OUT
       currentUser: updatedUser
     })
 
@@ -174,7 +174,7 @@ class App extends Component {
         }
       })
   }
-
+  //generates navbar is user is logged in
   navItems = () => {
     if(this.state.token){
       return (<>
@@ -186,6 +186,7 @@ class App extends Component {
         </>)
     }
   }
+  
   logout = () =>{
     localStorage.clear();
     this.setState({
