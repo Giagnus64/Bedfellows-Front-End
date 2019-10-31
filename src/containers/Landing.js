@@ -3,10 +3,10 @@ import { Card, Dimmer, Loader, Container, Header } from 'semantic-ui-react';
 import RelationshipCard from "../components/RelationshipCard";
 import RelationshipSpecs from "../components/RelationshipSpecs";
 import AddRelationshipForm from "../components/AddRelationshipForm"
+import { getUrl } from "../DBInfo";
 
-//heroku backend url
-//const url = "https://vast-badlands-33576.herokuapp.com"
-const url = "http://localhost:3000";
+
+const url = getUrl();
 
 class Landing extends React.Component {
 
@@ -62,7 +62,7 @@ class Landing extends React.Component {
       return {
         key: stranger.id,
         value: stranger.id, 
-        text: `${stranger.first_name}  ${stranger.last_name}` 
+        text: `${stranger.first_name} ${stranger.last_name}` 
       }
     })
   }
@@ -94,7 +94,7 @@ class Landing extends React.Component {
     
   }
   // display relationship show box
-  getCurrentRelationship = (relationship) => {``
+  getCurrentRelationship = (relationship) => {
     this.setState({
       currentRel: relationship,
       displayRel: true

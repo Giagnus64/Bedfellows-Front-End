@@ -3,15 +3,14 @@ import './App.scss';
 import { Menu } from "semantic-ui-react";
 import LoginContainer from "./containers/LoginContainer";
 import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
+import { getUrl } from "./DBInfo";
 
 import Landing from './containers/Landing'
 import NotFound from './components/NotFound'
 import Profile from './components/Profile'
 import DateContainer from './containers/DateContainer'
 
-// heroku-hosted backend
-//const url = "https://vast-badlands-33576.herokuapp.com"
-const url = "http://localhost:3000"
+const url = getUrl();
 
 class App extends Component {
 

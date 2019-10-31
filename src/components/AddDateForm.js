@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { Form, Header } from "semantic-ui-react";
 import { DateTimeInput } from  "semantic-ui-calendar-react";
+import { getUrl } from "../DBInfo";
 
-const url = "https://vast-badlands-33576.herokuapp.com"
+const url = getUrl();
+
 const DEFAULT_STATE = {
     relationship_id: '',
     location: '',

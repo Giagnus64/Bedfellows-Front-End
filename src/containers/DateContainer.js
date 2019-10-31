@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Container, Card, Header } from "semantic-ui-react";
 import DateCard from '../components/DateCard'
 import AddDateForm from '../components/AddDateForm'
+import { getUrl } from "../DBInfo";
 
-const url = "https://vast-badlands-33576.herokuapp.com"
+const url = getUrl();
 
 export default class DateContainer extends Component{
 
