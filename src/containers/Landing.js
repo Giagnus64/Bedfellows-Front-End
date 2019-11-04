@@ -198,7 +198,7 @@ updateRelationshipStatus = (status, id) => {
       })
     .then(res => res.json())
     .then((data) => {
-      console.log(data, "submit new rel");
+      //console.log(data, "submit new rel");
       this.props.getCurrentUser();
       this.getUserOptions();
     })
