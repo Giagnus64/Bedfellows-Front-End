@@ -31,7 +31,7 @@ class RelationshipSpecs extends React.Component {
         if(this.props.relationship.outings.length !== 0){
             return this.props.relationship.outings.map((outing) => {
                 let datetime = new Date(outing.time)
-                return (<List.Item>{`${outing.activity} at ${outing.location} on ${datetime.toLocaleString()}`}</List.Item>)
+                return (<List.Item key={outing.id}>{`${outing.activity} at ${outing.location} on ${datetime.toLocaleString()}`}</List.Item>)
             })
         } else{
             return (<h3> You have no upcoming dates!</h3>)
@@ -40,7 +40,7 @@ class RelationshipSpecs extends React.Component {
 
     
     render(){
-        console.log(props)
+        console.log(this.props)
         return (
             <Container fluid id="relationship-show-container" style={{ paddingTop: "20px", paddingBottom: "20px" }}>
                 <Icon name='x' style={

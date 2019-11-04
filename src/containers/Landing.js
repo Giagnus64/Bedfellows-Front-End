@@ -13,7 +13,7 @@ class Landing extends React.Component {
   state = {
     currentRel: '',
     displayRel: false, 
-    currentUserId: localStorage.user_id,
+    currentUserId: parseInt(localStorage.user_id),
     strangers: [], 
     selectedUserId: ''
   }
@@ -212,8 +212,25 @@ updateRelationshipStatus = (status, id) => {
       displayRel: false
     })
   }
+
+  getPartner = () => {
+    if(this.state.currentRel.asker){
+      if(this.state.currentRel.asker.id === this.state.currentUserId){
+        return this.state.currentRel.askee
+      } else{
+        return this.state.currentRel.asker
+      }
+    } else if(this.state.currentRel.askee){
+      if(this.state.currentRel.askee.id === this.state.currentUserId){
+        return this.state.currentRel.asker
+      } else{
+        return this.state.currentRel.askee
+      }
+    }
+}
   
   render() {
+    console.log(this.state)
     return (
     <>
     <Container fluid style={
@@ -235,7 +252,7 @@ updateRelationshipStatus = (status, id) => {
     </Container>
     <br></br>
       {this.state.displayRel ? <RelationshipSpecs 
-        partner={this.state.currentRel.asker ? this.state.currentRel.asker : this.state.currentRel.askee} 
+        partner={this.getPartner()} 
         relationship={this.state.currentRel}
         updateRelationship={this.updateRelationship}
         updateRelationshipStatus={this.updateRelationshipStatus}
