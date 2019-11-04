@@ -230,7 +230,7 @@ updateRelationshipStatus = (status, id) => {
 }
   
   render() {
-    console.log(this.state)
+    //console.log(this.state)
     return (
     <>
     <Container fluid style={
