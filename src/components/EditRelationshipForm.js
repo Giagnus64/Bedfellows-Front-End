@@ -35,7 +35,7 @@ class EditRelationshipForm extends React.Component {
 
     }
     render(){
-        console.log(this.props)
+        //console.log(this.props)
         return (
             <Form style={{backgroundColor:"white", padding:'20px'}}>
                 <Form.Group widths='equal'>

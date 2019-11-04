@@ -40,6 +40,7 @@ class RelationshipSpecs extends React.Component {
 
     
     render(){
+        console.log(props)
         return (
             <Container fluid id="relationship-show-container" style={{ paddingTop: "20px", paddingBottom: "20px" }}>
                 <Icon name='x' style={
