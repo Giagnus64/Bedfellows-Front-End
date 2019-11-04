@@ -9,6 +9,7 @@ import Landing from './containers/Landing'
 import NotFound from './components/NotFound'
 import Profile from './components/Profile'
 import DateContainer from './containers/DateContainer'
+import Footer from './components/Footer';
 
 const url = getUrl();
 
@@ -244,6 +245,7 @@ class App extends Component {
         <Route component={ NotFound } />
         </Switch>
     </div>
+    <Footer/>
     </>
     );
   }
