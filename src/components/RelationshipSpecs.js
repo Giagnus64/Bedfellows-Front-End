@@ -82,7 +82,7 @@ class RelationshipSpecs extends React.Component {
                         open={this.state.confirmOpen}
                         onCancel={this.closeConfirm}
                         onConfirm={() => {
-                            this.props.updateRelationshipStatus("denied", this.props.relationship.id);
+                            this.props.updateRelationshipStatus("ended", this.props.relationship.id);
                             this.props.closeShowDiv();
                             this.closeConfirm();
                         }}

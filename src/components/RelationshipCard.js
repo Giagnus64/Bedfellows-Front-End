@@ -22,6 +22,8 @@ const RelationshipCard = (props) => {
             }
         } else if(status === "denied") {
             return (<h3 className="denied-text">Relationship Denied</h3>)
+        } else if(status === "ended") {
+            return (<h3 className="denied-text">Relationship Ended</h3>)
         } else{
             return (
                 <div className='ui two buttons'>
@@ -41,7 +43,10 @@ const RelationshipCard = (props) => {
                 return `You have denied a relationship request from ${name}.`
             } else if(status === "pending"){
                 return `${name}'s relationship request is waiting for your response!`
-            } else {
+            } else if(status === "ended"){
+                return `Your relationship with ${name} has ended.`
+            }
+            else {
                 return `You are in a relationship with ${name}!`
             }
         } else {
@@ -49,7 +54,9 @@ const RelationshipCard = (props) => {
                 return `${name} has denied your relationship request.`;
             } else if(status === "pending") {
                 return `Your relationship request to ${name} is still pending.`;
-            } else{
+            } else if (status === "ended") {
+                return `Your relationship with ${name} has ended.`
+            }else{
                 return `You are in a relationship with ${name}!`
             }
         } 
