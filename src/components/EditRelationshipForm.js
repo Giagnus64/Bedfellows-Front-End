@@ -17,7 +17,7 @@ class EditRelationshipForm extends React.Component {
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
-        }, console.log("form state", this.state))
+        })
     }
 
     handleDateChange = (e, obj) => {
@@ -26,7 +26,7 @@ class EditRelationshipForm extends React.Component {
         let dateObj = new Date(dateArr[2], dateArr[1] - 1, dateArr[0])
         this.setState({
             anniversary: dateObj
-        }, console.log(this.state))
+        })
     }
     handleSubmit = (e) => {
         e.preventDefault();

@@ -28,7 +28,7 @@ class App extends Component {
   //gets user info from api using login info
   componentDidMount() {
     if (localStorage.token) {
-      console.log("app mounted")
+      //console.log("app mounted")
       this.setState({
         token: localStorage.token,
         currentUserID: localStorage.user_id
@@ -116,7 +116,7 @@ class App extends Component {
     fetch(url + `/login`, config)
       .then(r => r.json())
       .then(user => {
-        console.log(user)
+        //console.log(user)
         if (user.messages) {
           this.setState({
             formError: true,

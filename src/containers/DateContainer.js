@@ -31,7 +31,6 @@ export default class DateContainer extends Component{
             })
         .then(res => res.json())
         .then(data => {
-            console.log("partners", data)
             this.setState({
                 partners: data
             })
@@ -50,7 +49,6 @@ export default class DateContainer extends Component{
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({
                     dates: data
                 })

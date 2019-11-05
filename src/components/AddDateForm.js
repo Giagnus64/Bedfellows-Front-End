@@ -39,10 +39,11 @@ class AddDateForm extends Component {
             })
         }).then(res => res.json())
         .then(data => {
-            this.props.getDates()
             this.setState({
                 ...DEFAULT_STATE
             })
+            this.props.getDates()
+            
         })
     }
 
@@ -59,7 +60,7 @@ class AddDateForm extends Component {
     handleChange = (e, obj) => {
         this.setState({
             [e.target.name]: e.target.value
-        }, console.log(this.state))
+        })
     }
 
     //*************************DROPDOWN STUFF **/
@@ -129,6 +130,7 @@ class AddDateForm extends Component {
                         placeholder="Location"
                         name="location"
                         onChange={this.handleChange}
+                        value={this.state.location}
                         >
                     </Form.Input>
             </Form.Group>
@@ -138,6 +140,7 @@ class AddDateForm extends Component {
                         placeholder="Activity" 
                         name="activity"
                         onChange={this.handleChange}
+                        value={this.state.activity}
                     >
                     </Form.Input>
             </Form.Group>

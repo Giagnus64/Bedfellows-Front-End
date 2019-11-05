@@ -3,7 +3,7 @@ import { Card, Button } from 'semantic-ui-react';
 
 // if asked = true, user has been asked
 const DateCard = (props) => {
-    console.log(props)
+    
     const dateTime = new Date(props.dateData.time)
     
 
@@ -22,9 +22,7 @@ const DateCard = (props) => {
         </Card.Content>
         <Card.Content extra>
             <div className='ui two buttons'>
-                <Button basic color='green'>
-                See Date
-                </Button>
+            
                 <Button basic color='red'
                 onClick={() => props.deleteDate(props.dateData.id)}>Delete Date</Button>
             </div>
