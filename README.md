@@ -5,13 +5,13 @@ A webapp that connects users and allows them to manage their relationships with 
 Users are able request relationships with other users, as well as accept or deny relationship requests. Once in a relationship, users can schedule dates with their relationship partners.  Users can also edit their profile info and info about their individual relationships.
 
 ## Demo
-Live Here:[BedFellows](https://bedfellows-client.herokuapp.com/home) Demo Video coming soon!
+[Live](https://bedfellows-client.herokuapp.com/home)(User: test Pass:123)| [Video](https://youtu.be/4jOM8oaO5dY)
 
 ## Built with
  *Back-end*
 - [Ruby on Rails](https://rubyonrails.org) - Server Framework
 - [PostgreSQL](https://www.postgresql.org) - Database
-- Auth using [JWT](https://jwt.io) tokens and [bcrypt ] (https://rubygems.org/gems/bcrypt/versions/3.1.12) encryption
+- Auth using [JWT](https://jwt.io) tokens and [bcrypt] (https://rubygems.org/gems/bcrypt/versions/3.1.12) encryption
 
 *Front-end*
 - [React](https://reactjs.org/docs/getting-started.html) - Front-end Framework
